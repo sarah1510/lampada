@@ -6,4 +6,4 @@ O projeto consiste em criar uma lâmpada que tenha três ações, ligar, deligar
 
 O código foi construido pensando em boas práticas, como responsabilidade única e funcões puras. 
 
-![](img/projeto.png)
+![](img/captura.png)
