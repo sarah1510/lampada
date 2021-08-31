@@ -1,5 +1,7 @@
 "use strict"
 
+const lampada = document.getElementById("lampada")
+let idInterval
 
 function botoesLigaDesliga (ligarEstado, desligarEstado) {
     const ligar = document.getElementById("ligar")
@@ -8,23 +10,23 @@ function botoesLigaDesliga (ligarEstado, desligarEstado) {
     desligar.disabled = desligarEstado
 }
 
-function lampadaQuebrada () {
-    return document.getElementById("lampada").src.indexOf("quebrada") !== -1
-}
+// function lampadaQuebrada () {
+//     return lampada.src.indexOf("quebrada") !== -1
+// }
+
+// function arrow
+
+const lampadaQuebrada = () => lampada.src.indexOf("quebrada") !== -1
 
 function ligarLampada () {
-    const lampada = document.getElementById("lampada")
-
+    
     if (!lampadaQuebrada()){
         lampada.src = "img/ligada.jpg"
         botoesLigaDesliga(true, false)
     }
 }
 
-
 function desligarLampada () {
-    const lampada = document.getElementById("lampada")
-
 
     if (!lampadaQuebrada()){
         lampada.src = "img/desligada.jpg"
@@ -32,14 +34,39 @@ function desligarLampada () {
     }    
 }
 
-
 function quebrarLampada () {
-    const lampada = document.getElementById("lampada")
-
 
     lampada.src = "img/quebrada.jpg"
     botoesLigaDesliga(true, true)
 }
+
+// function lampadaDesligada() {
+//     return lampada.src.includes("desligada")
+// }
+
+const lampadaDesligada = () => lampada.src.includes("desligada")
+
+function trocarImagem() {
+    if (lampadaDesligada()){
+        ligarLampada()
+    } else {
+        desligarLampada()
+    }
+}
+
+function piscar() {
+    const piscar = document.getElementById("piscar")
+   
+    if (piscar.textContent == "Piscar") {
+        idInterval = setInterval(trocarImagem, 1000)
+        piscar.textContent = "Parar"
+    } else { 
+        clearInterval(idInterval)
+        piscar.textContent = "Piscar"
+    }
+}
+
+
 
 
 // Eventos
@@ -48,3 +75,4 @@ document.getElementById("desligar").addEventListener("click", desligarLampada)
 document.getElementById("lampada").addEventListener("dblclick", quebrarLampada)
 document.getElementById("lampada").addEventListener("mouseover", ligarLampada)
 document.getElementById("lampada").addEventListener("mouseleave", desligarLampada)
+document.getElementById("piscar").addEventListener("click", piscar)
